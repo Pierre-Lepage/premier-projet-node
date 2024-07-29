@@ -1,0 +1,143 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 600px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 8px;
+}
+
+input[type="text"],
+input[type="password"] {
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Reset des styles pour les éléments du menu */
+header, nav, ul, li, footer {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* Style général du menu et du footer */
+header, footer {
+    background-color: #333; /* Couleur de fond du header et du footer */
+    color: #fff; /* Couleur du texte */
+    padding: 10px 0; /* Espacement intérieur */
+}
+
+nav, .footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.logo {
+    font-size: 1.2em; /* Taille de police du logo */
+    font-weight: bold; /* Gras pour le texte du logo */
+}
+
+ul {
+    list-style-type: none; /* Supprime les puces de liste */
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+ul li {
+    margin-left: 20px; /* Espacement entre les éléments du menu */
+}
+
+ul li:first-child {
+    margin-left: 0; /* Pas de marge à gauche pour le premier élément */
+}
+
+ul li a {
+    color: #fff; /* Couleur du texte des liens */
+    text-decoration: none; /* Pas de soulignement par défaut */
+    padding: 10px 15px; /* Espacement intérieur des liens */
+    display: inline-block; /* Affichage en bloc pour l'élément a */
+    transition: background-color 0.3s; /* Transition sur la couleur de fond */
+}
+
+ul li a:hover {
+    background-color: #555; /* Couleur de fond au survol */
+}
+
+/* Ajout pour fixer le footer en bas de page */
+main {
+    flex: 1;
+}
+
+.footer {
+    background-color: #333; /* Couleur de fond du footer */
+    color: #fff; /* Couleur du texte */
+    padding: 10px 0; /* Espacement intérieur */
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+#articles-list div {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+#article-detail img {
+    max-width: 50%;
+    height: auto;
+}

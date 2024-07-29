@@ -1,0 +1,26 @@
+[
+  {
+    "nom": "bic",
+    "codeArticle": "12345",
+    "description": "stylo bille",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/03-BICcristal2008-03-26.jpg/280px-03-BICcristal2008-03-26.jpg",
+    "prix": 2.49,
+    "quantite": 1
+  },
+  {
+    "nom": "bic 4 couleurs",
+    "codeArticle": "1369",
+    "description": "stylo 4 couleurs",
+    "image": "https://www.az-fournitures.com/media/catalog/product/cache/1a9d65105e7994ae2f201fa2b32bd7f3/b/i/bic-stylo-a-bille-4-couleurs-bleu-889969-visuel.jpg",
+    "prix": 2.9,
+    "quantite": 1
+  },
+  {
+    "nom": "Lepage",
+    "codeArticle": "12345",
+    "description": "qsdcsdcsdc ",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/03-BICcristal2008-03-26.jpg/280px-03-BICcristal2008-03-26.jpg",
+    "prix": 12,
+    "quantite": 1
+  }
+]

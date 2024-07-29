@@ -1,0 +1,27 @@
+<%- include('partials/header') %>
+<main role="main" class="container">
+    <h1>Liste des articles</h1>
+    <div id="articles-list"></div>
+</main>
+<%- include('partials/footer') %>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        fetch('/api/articles')
+            .then(response => response.json())
+            .then(articles => {
+                const articlesList = document.getElementById('articles-list');
+                articles.forEach(article => {
+                    const articleDiv = document.createElement('div');
+                    articleDiv.innerHTML = `
+                        <h2>${article.nom}</h2>
+                        <p>Code Article: ${article.codeArticle}</p>
+                        <p>Description: ${article.description}</p>
+                        <p>Prix: ${article.prix} €</p>
+                        <p>Quantité: ${article.quantite}</p>
+                        <a href="/article/${article.codeArticle}">Voir plus</a>
+                    `;
+                    articlesList.appendChild(articleDiv);
+                });
+            });
+    });
+</script>
