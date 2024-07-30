@@ -1,8 +1,5 @@
-Voici un guide détaillé de votre projet Node.js basé sur les fichiers fournis :
-
-Structure du projet
-Votre projet est structuré comme suit :
-
+Guide du Projet Node.js
+1. Structure du Projet
 lua
 Copier le code
 .
@@ -14,7 +11,8 @@ Copier le code
 │   ├── log.json
 │   └── users.json
 ├── models
-│   └── User.js
+│   ├── User.js
+│   └── Article.js         # Nouveau modèle Mongoose pour les articles
 ├── package-lock.json
 ├── package.json
 ├── public
@@ -34,38 +32,48 @@ Copier le code
     │   ├── footer.ejs
     │   └── header.ejs
     └── register.ejs
-Configuration
-config.js : Ce fichier contient les configurations de votre application, y compris la connexion à la base de données MongoDB avec l'URI mongodb://localhost:27017/BDD1_projet_node​​.
-Serveur et Middleware
-server.js : C'est le fichier principal de votre serveur. Il utilise Express pour créer le serveur et configure les middlewares pour gérer les sessions, les messages flash, le parsing des données des formulaires, et la gestion des fichiers statiques​​. Il établit également la connexion à MongoDB et définit plusieurs routes pour les opérations CRUD sur les utilisateurs et les articles.
-Routes
-users.js : Ce fichier gère les routes pour l'inscription, la connexion, et l'authentification des utilisateurs. Il utilise bcrypt pour le hachage des mots de passe et jsonwebtoken pour la gestion des tokens JWT​​.
-Modèles de données
+2. Configuration
+config.js : Ce fichier contient les configurations de l'application, y compris la connexion à la base de données MongoDB avec l'URI mongodb://localhost:27017/BDD1_projet_node.
+3. Serveur et Middleware
+server.js : C'est le fichier principal de votre serveur. Il utilise Express pour créer le serveur et configure les middlewares pour gérer les sessions, les messages flash, le parsing des données des formulaires, et la gestion des fichiers statiques. Il établit également la connexion à MongoDB et définit plusieurs routes pour les opérations CRUD sur les utilisateurs et les articles.
+4. Routes
+users.js : Ce fichier gère les routes pour l'inscription, la connexion, et l'authentification des utilisateurs. Il utilise bcrypt pour le hachage des mots de passe et jsonwebtoken pour la gestion des tokens JWT.
+Routes d'API :
+Recherche : Route /api/search pour rechercher des articles par nom ou description.
+Inscription : Route /api/register pour l'inscription des utilisateurs.
+Connexion : Route /api/login pour la connexion des utilisateurs.
+CRUD Articles : Routes pour créer, lire, mettre à jour et supprimer des articles.
+5. Modèles de Données
 User.js : Modèle Mongoose pour les utilisateurs, avec des champs pour le nom d'utilisateur, l'email, et le mot de passe.
-articleSchema : Définition du schéma pour les articles, incluant des champs tels que nom, codeArticle, description, image, prix, et quantite​​.
-Vues
+Article.js : Modèle Mongoose pour les articles, incluant des champs tels que nom, codeArticle, description, image, prix, quantite, et categorie.
+6. Vues
 Les vues utilisent EJS pour le rendu dynamique des pages. Les fichiers principaux incluent :
 
-index.ejs : Page d'accueil du site​​.
-login.ejs : Page de connexion des utilisateurs​​.
-register.ejs : Page d'inscription des utilisateurs​​.
-create.ejs : Page pour créer un nouvel article​​.
-articles.ejs : Affiche la liste des articles disponibles​​.
-article.ejs : Détail d'un article spécifique​​.
-partials/header.ejs et partials/footer.ejs : Contiennent le header et le footer communs à toutes les pages​​​​.
-Fichiers Statics
-style.css : Fichier de style principal pour le projet, définissant les styles pour les différentes pages et composants​​.
-script.js : Fichier JavaScript gérant des fonctionnalités front-end comme l'état de connexion de l'utilisateur​​.
-Journalisation
-logger.js : Utilise winston pour la gestion des logs. Les logs sont enregistrés dans le dossier logs sous forme de fichiers JSON​​.
-Fonctionnalités principales
+index.ejs : Page d'accueil du site.
+login.ejs : Page de connexion des utilisateurs.
+register.ejs : Page d'inscription des utilisateurs.
+create.ejs : Page pour créer un nouvel article.
+articles.ejs : Affiche la liste des articles disponibles avec des fonctionnalités de recherche et de filtrage par catégorie.
+article.ejs : Détail d'un article spécifique.
+partials/header.ejs et partials/footer.ejs : Contiennent le header et le footer communs à toutes les pages.
+7. Fichiers Statics
+style.css : Fichier de style principal pour le projet, définissant les styles pour les différentes pages et composants, y compris la barre de recherche et le filtre par catégorie.
+script.js : Fichier JavaScript gérant des fonctionnalités front-end comme l'état de connexion de l'utilisateur.
+8. Journalisation
+logger.js : Utilise winston pour la gestion des logs. Les logs sont enregistrés dans le dossier logs sous forme de fichiers JSON.
+9. Fonctionnalités Principales
 Inscription et Connexion des Utilisateurs : Gestion sécurisée des utilisateurs avec hachage des mots de passe et tokens JWT.
 CRUD sur les Articles : Créer, lire, mettre à jour et supprimer des articles.
 Gestion des Sessions : Utilisation de express-session pour gérer les sessions utilisateur.
 Messages Flash : Pour afficher des messages d'information ou d'erreur temporaires.
 Protection des Routes : Middleware ensureAuthenticated pour protéger les routes nécessitant une authentification.
-Ce guide vous donne une vue d'ensemble du fonctionnement de votre projet Node.js, des fichiers et des fonctionnalités clés. Pour toute autre question ou besoin d'assistance, n'hésitez pas à demander !
-
+Barre de Recherche : Fonctionnalité de recherche pour les articles, avec une barre de recherche centrée sous le header.
+Filtre par Catégorie : Permet de filtrer les articles par catégorie.
+10. Améliorations et Suggestions
+Pagination : Implémenter la pagination pour la liste des articles.
+Optimisation de la Recherche : Ajouter des suggestions de recherche en temps réel.
+Gestion des Erreurs : Améliorer les messages d'erreur pour les utilisateurs.
+Ce guide reflète les dernières modifications et améliorations apportées à votre projet. Si vous avez d'autres questions ou si vous souhaitez explorer des fonctionnalités supplémentaires, n'hésitez pas à le faire savoir !
 ____________________________________________________________
 
 Utilisation des API dans le Projet

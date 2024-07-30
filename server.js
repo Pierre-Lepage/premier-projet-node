@@ -6,6 +6,7 @@ const session = require('express-session');
 const bcrypt = require('bcrypt');
 const flash = require('connect-flash');
 const config = require('./config');
+const Article = require('./models/Article'); // Import du modèle Article
 
 const app = express();
 const port = 3000;
@@ -62,17 +63,7 @@ const userSchema = new mongoose.Schema({
   password: String,
 });
 
-const articleSchema = new mongoose.Schema({
-  nom: String,
-  codeArticle: String,
-  description: String,
-  image: String,
-  prix: Number,
-  quantite: Number,
-});
-
 const User = mongoose.model('User', userSchema);
-const Article = mongoose.model('Article', articleSchema);
 
 // Routes
 app.get('/', ensureAuthenticated, (req, res) => {
@@ -92,9 +83,19 @@ app.get('/create', ensureAuthenticated, (req, res) => {
 });
 
 app.get('/articles', ensureAuthenticated, async (req, res) => {
+  const category = req.query.category;
+
   try {
-    const articles = await Article.find({});
-    res.render('articles', { title: 'Liste des articles', articles });
+    let query = {};
+    if (category) {
+      query.categorie = category;
+    }
+
+    const articles = await Article.find(query);
+    const categories = await Article.distinct('categorie'); // Récupération des catégories uniques
+
+    console.log('Catégories récupérées:', categories); // Log de vérification
+    res.render('articles', { title: 'Liste des articles', articles, categories });
   } catch (err) {
     console.error('Erreur lors de la récupération des articles :', err);
     res.status(500).send('Erreur lors de la récupération des articles');
@@ -155,7 +156,7 @@ app.post('/api/login', async (req, res) => {
 
 // API pour créer un article
 app.post('/create', ensureAuthenticated, async (req, res) => {
-  const { nom, codeArticle, description, image, prix, quantite } = req.body;
+  const { nom, codeArticle, description, image, prix, quantite, categorie } = req.body;
 
   try {
     const newArticle = new Article({
@@ -164,7 +165,8 @@ app.post('/create', ensureAuthenticated, async (req, res) => {
       description,
       image,
       prix: parseFloat(prix),
-      quantite: parseInt(quantite, 10)
+      quantite: parseInt(quantite, 10),
+      categorie // Enregistrement de la catégorie
     });
     await newArticle.save();
     console.log('Article créé :', codeArticle);
@@ -172,6 +174,25 @@ app.post('/create', ensureAuthenticated, async (req, res) => {
   } catch (err) {
     console.error('Erreur lors de l\'insertion de l\'article :', err);
     res.status(500).send('Erreur lors de la création de l\'article');
+  }
+});
+
+// API pour rechercher des articles
+app.get('/api/search', ensureAuthenticated, async (req, res) => {
+  const query = req.query.q; // Le terme de recherche
+
+  try {
+    // Rechercher des articles dont le nom ou la description contient le terme de recherche
+    const articles = await Article.find({
+      $or: [
+        { nom: { $regex: query, $options: 'i' } }, // Recherche insensible à la casse
+        { description: { $regex: query, $options: 'i' } }
+      ]
+    });
+    res.json(articles);
+  } catch (err) {
+    console.error('Erreur lors de la recherche d\'articles :', err);
+    res.status(500).send('Erreur lors de la recherche');
   }
 });
 

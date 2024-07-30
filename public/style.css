@@ -203,3 +203,41 @@ ul li a:hover {
 .custom-footer .text-muted {
     color: #fff !important; /* Couleur du texte en blanc */
 }
+
+/* Styles pour la barre de recherche */
+.search-bar-container {
+    width: 100%;
+    padding: 10px 0;
+    background-color: #f8f9fa; /* Couleur de fond pour la barre de recherche */
+    border-bottom: 1px solid #e0e0e0; /* Optionnel: bordure pour séparer la barre de recherche du contenu */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optionnel: légère ombre */
+    padding: 10px;
+}
+
+.search-bar-container .form-inline {
+    display: flex;
+    justify-content: center; /* Centrer le formulaire horizontalement */
+}
+
+.search-bar-container .form-control {
+    max-width: 600px; /* Limite la largeur du champ de recherche */
+    width: 100%;
+    margin: 0 auto; /* Centrage horizontal */
+    border-radius: 4px;
+    padding: 5px;
+}
+
+/* Styles pour le filtre par catégorie */
+.category-filter-container {
+    width: 100%;
+    padding: 10px 0;
+   
+}
+
+.category-filter-container .category-filter {
+    max-width: 600px; /* Limite la largeur du filtre par catégorie */
+    width: 100%;
+    margin: 0 auto; /* Centrage horizontal */
+    border-radius: 4px;
+    padding: 5px;
+}

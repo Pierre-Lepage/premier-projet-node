@@ -1,34 +1,81 @@
 <%- include('partials/header') %>
 <main role="main" class="container my-4">
     <h1 class="text-center">Liste des articles</h1>
-    <div id="articles-list" class="row"></div>
+
+    <!-- Filtre par catégorie -->
+    <div class="category-filter-container mb-4">
+        <select id="category-filter" class="form-control category-filter" onchange="filterByCategory()">
+            <option value="">Toutes les catégories</option>
+            <% if (typeof categories !== 'undefined' && categories.length > 0) { %>
+                <% categories.forEach(categorie => { %>
+                    <option value="<%= categorie %>"><%= categorie %></option>
+                <% }) %>
+            <% } %>
+        </select>
+    </div>
+
+    <div id="articles-list" class="row">
+        <% articles.forEach(article => { %>
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h2 class="card-title"><%= article.nom %></h2>
+                        <p class="card-text">Catégorie: <%= article.categorie %></p>
+                        <p class="card-text">Description: <%= article.description %></p>
+                        <p class="card-text">Prix: <%= article.prix %> €</p>
+                        <div class="mt-auto text-center">
+                            <a href="/article/<%= article.codeArticle %>" class="btn btn-primary">Voir plus</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% }) %>
+    </div>
 </main>
-<%- include('partials/footer') %>
+
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        fetch('/api/articles')
+    function filterByCategory() {
+        const category = document.getElementById('category-filter').value;
+        window.location.href = category ? `/articles?category=${category}` : '/articles';
+    }
+</script>
+
+<script>
+    document.getElementById('search-form').addEventListener('submit', function(event) {
+        event.preventDefault(); // Empêche le rechargement de la page
+        const query = document.getElementById('search-query').value;
+
+        fetch(`/api/search?q=${query}`)
             .then(response => response.json())
             .then(articles => {
-                const articlesList = document.getElementById('articles-list');
-                articles.forEach(article => {
-                    const articleDiv = document.createElement('div');
-                    articleDiv.classList.add('col-md-6', 'mb-4');
-                    articleDiv.innerHTML = `
-                        <div class="card h-100">
-                            <div class="card-body">
-                                <h2 class="card-title">${article.nom}</h2>
-                                <p class="card-text">Code Article: ${article.codeArticle}</p>
-                                <p class="card-text">Description: ${article.description}</p>
-                                <p class="card-text">Prix: ${article.prix} €</p>
-                                <p class="card-text">Quantité: ${article.quantite}</p>
-                               <div class="mt-auto text-center">
-                                    <a href="/article/${article.codeArticle}" class="btn btn-primary">Voir plus</a>
+                // Code pour afficher les articles dans la page
+                let resultsContainer = document.getElementById('articles-list');
+                resultsContainer.innerHTML = ''; // Efface les résultats précédents
+
+                if (articles.length === 0) {
+                    resultsContainer.innerHTML = '<p>Aucun article trouvé</p>';
+                } else {
+                    articles.forEach(article => {
+                        const articleDiv = document.createElement('div');
+                        articleDiv.className = 'col-md-6 mb-4';
+                        articleDiv.innerHTML = `
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h2 class="card-title">${article.nom}</h2>
+                                    <p class="card-text">Catégorie: ${article.categorie}</p>
+                                    <p class="card-text">Description: ${article.description}</p>
+                                    <p class="card-text">Prix: ${article.prix} €</p>
+                                    <div class="mt-auto text-center">
+                                        <a href="/article/${article.codeArticle}" class="btn btn-primary">Voir plus</a>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                    `;
-                    articlesList.appendChild(articleDiv);
-                });
-            });
+                            </div>`;
+                        resultsContainer.appendChild(articleDiv);
+                    });
+                }
+            })
+            .catch(error => console.error('Erreur lors de la recherche:', error));
     });
 </script>
+
+<%- include('partials/footer') %>
