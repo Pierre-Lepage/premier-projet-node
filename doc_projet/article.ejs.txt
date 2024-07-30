@@ -1,0 +1,24 @@
+<%- include('partials/header') %>
+<main role="main" class="container">
+    <div id="article-detail"></div>
+</main>
+<%- include('partials/footer') %>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const pathArray = window.location.pathname.split('/');
+        const codeArticle = pathArray[pathArray.length - 1];
+        fetch(`/api/article/${codeArticle}`)
+            .then(response => response.json())
+            .then(article => {
+                const articleDetail = document.getElementById('article-detail');
+                articleDetail.innerHTML = `
+                    <h1>${article.nom}</h1>
+                    <p>Code Article: ${article.codeArticle}</p>
+                    <p>Description: ${article.description}</p>
+                    <img src="${article.image}" alt="${article.nom}">
+                    <p>Prix: ${article.prix} €</p>
+                    <p>Quantité: ${article.quantite}</p>
+                `;
+            });
+    });
+</script>

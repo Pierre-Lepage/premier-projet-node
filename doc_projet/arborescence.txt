@@ -1,0 +1,30 @@
+.
+├── config.js
+├── data
+│   └── articles.json
+├── logger.js
+├── logs
+│   ├── log.json
+│   └── users.json
+├── models
+│   └── User.js
+├── package-lock.json
+├── package.json
+├── projet node.txt
+├── public
+│   ├── script.js
+│   └── style.css
+├── routes
+│   └── users.js
+├── server.js
+├── users.json
+└── views
+    ├── article.ejs
+    ├── articles.ejs
+    ├── create.ejs
+    ├── index.ejs
+    ├── login.ejs
+    ├── partials
+    │   ├── footer.ejs
+    │   └── header.ejs
+    └── register.ejs

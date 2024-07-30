@@ -1,0 +1,34 @@
+<%- include('partials/header') %>
+<main role="main" class="container my-4">
+    <h1 class="text-center">Liste des articles</h1>
+    <div id="articles-list" class="row"></div>
+</main>
+<%- include('partials/footer') %>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        fetch('/api/articles')
+            .then(response => response.json())
+            .then(articles => {
+                const articlesList = document.getElementById('articles-list');
+                articles.forEach(article => {
+                    const articleDiv = document.createElement('div');
+                    articleDiv.classList.add('col-md-6', 'mb-4');
+                    articleDiv.innerHTML = `
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h2 class="card-title">${article.nom}</h2>
+                                <p class="card-text">Code Article: ${article.codeArticle}</p>
+                                <p class="card-text">Description: ${article.description}</p>
+                                <p class="card-text">Prix: ${article.prix} €</p>
+                                <p class="card-text">Quantité: ${article.quantite}</p>
+                               <div class="mt-auto text-center">
+                                    <a href="/article/${article.codeArticle}" class="btn btn-primary">Voir plus</a>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    articlesList.appendChild(articleDiv);
+                });
+            });
+    });
+</script>

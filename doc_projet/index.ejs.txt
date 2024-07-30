@@ -1,0 +1,8 @@
+<%- include('partials/header') %>
+<main role="main" class="container">
+    <div class="starter-template">
+        <h1>Bienvenue sur la page d'accueil</h1>
+        <p class="lead">Ceci est le contenu de la page d'accueil.</p>
+    </div>
+</main>
+<%- include('partials/footer') %>
