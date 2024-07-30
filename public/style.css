@@ -7,11 +7,11 @@ body {
     flex-direction: column;
     min-height: 100vh;
     padding-top: 80px; /* Augmenter l'espace pour le header */
-    padding-bottom: 60%; /* Espace pour le footer */
+    padding-bottom: 130px; /* Corriger l'espace pour le footer */
 }
 
 .container {
-    max-width: 600px;
+    max-width: 1200px;
     margin: 20px auto;
     background-color: #fff;
     padding: 20px;
@@ -19,7 +19,7 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-h1 {
+h1, h2, p {
     text-align: center;
 }
 
@@ -117,16 +117,32 @@ ul li a:hover {
     background-color: #555; /* Couleur de fond au survol */
 }
 
-#articles-list div {
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin-top: 10px;
+/* Style pour les cartes d'articles */
+.card {
+    margin: 10px 0;
+    border: 1px solid #ddd; /* Bordure unique pour les cartes */
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
-#article-detail img {
-    max-width: 50%;
-    height: auto;
+#articles-list {
+    display: flex;
+    flex-wrap: wrap;
 }
+
+#articles-list .col-md-6 {
+    margin-bottom: 20px;
+}
+
+/* Style pour les détails de l'article */
+#article-detail img {
+    max-width: 25%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
 
 /* Style pour la navbar */
 .custom-navbar {
@@ -149,7 +165,7 @@ ul li a:hover {
 }
 
 .custom-navbar .navbar-toggler-icon {
-    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%288, 8, 8, 0.5%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='white' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
 }
 
 .custom-navbar .collapse {

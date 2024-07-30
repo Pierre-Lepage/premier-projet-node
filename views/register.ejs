@@ -1,17 +1,49 @@
 <%- include('partials/header') %>
 <main role="main" class="container">
-    <h1>Register</h1>
-    <form action="/register" method="POST">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required>
-        <br>
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
-        <br>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
-        <br>
-        <button type="submit">Register</button>
+    <h1>Inscription</h1>
+    <div id="error-message" style="color: red;"></div>
+    <form id="registerForm">
+        <div class="form-group">
+            <label for="username">Nom d'utilisateur:</label>
+            <input type="text" class="form-control" id="username" name="username" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Mot de passe:</label>
+            <input type="password" class="form-control" id="password" name="password" required>
+        </div>
+        <button type="submit" class="btn btn-primary">S'inscrire</button>
     </form>
+    <p>Déjà inscrit ? <a href="/login">Se connecter</a></p>
 </main>
 <%- include('partials/footer') %>
+
+<script>
+    document.getElementById('registerForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const username = document.getElementById('username').value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+
+        try {
+            const response = await fetch('/api/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name: username, email, password })
+            });
+
+            const data = await response.json();
+            if (data.success) {
+                window.location.href = '/login';
+            } else {
+                document.getElementById('error-message').textContent = data.msg || 'Erreur lors de l\'inscription';
+            }
+        } catch (error) {
+            console.error('Erreur:', error);
+            document.getElementById('error-message').textContent = 'Erreur lors de l\'inscription';
+        }
+    });
+</script>
